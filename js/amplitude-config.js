@@ -8,7 +8,7 @@
  * =====================================================
  */
 
-const AMPLITUDE_API_KEY = 'REPLACE_WITH_YOUR_API_KEY';
+const AMPLITUDE_API_KEY = '77b39c40a67ec7faaf4f0926567eb2d';
 
 // ── Initialize Amplitude ─────────────────────────────
 window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
