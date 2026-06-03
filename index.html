@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Analytics — Intelligent Product Analytics</title>
+  <meta name="description" content="Nexus Analytics transforms raw user behavior into actionable intelligence. Stop guessing, start growing." />
+  <meta property="og:title" content="Nexus Analytics" />
+  <meta property="og:description" content="Intelligent product analytics for modern teams." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <!-- Amplitude SDK -->
+  <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script>
+  <script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.8.0-min.js.gz"></script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── NOISE OVERLAY ── -->
+  <div class="noise"></div>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo" onclick="trackNav('Logo')">
+        <span class="logo-mark">N</span>
+        <span class="logo-text">nexus</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features" onclick="trackNav('Features')">Features</a></li>
+        <li><a href="#how-it-works" onclick="trackNav('How It Works')">How it works</a></li>
+        <li><a href="#pricing" onclick="trackNav('Pricing')">Pricing</a></li>
+        <li><a href="#testimonials" onclick="trackNav('Testimonials')">Customers</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost" onclick="handleCTA('Sign In', 'Nav')">Sign in</a>
+        <a href="#" class="btn btn-primary" onclick="handleCTA('Start Free Trial', 'Nav')">Start free trial</a>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" onclick="trackNav('Features'); toggleMenu()">Features</a>
+      <a href="#how-it-works" onclick="trackNav('How It Works'); toggleMenu()">How it works</a>
+      <a href="#pricing" onclick="trackNav('Pricing'); toggleMenu()">Pricing</a>
+      <a href="#" class="btn btn-primary" onclick="handleCTA('Start Free Trial', 'Mobile Nav'); toggleMenu()">Start free trial</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="container">
+      <div class="hero-badge" data-animate>
+        <span class="badge-dot"></span>
+        <span>Now with AI-powered cohort predictions</span>
+      </div>
+      <h1 class="hero-title" data-animate>
+        Know exactly<br />
+        <em>why</em> users<br />
+        convert — or don't
+      </h1>
+      <p class="hero-sub" data-animate>
+        Nexus Analytics connects every user action to business outcomes.
+        Built for product teams who need answers, not dashboards.
+      </p>
+      <div class="hero-actions" data-animate>
+        <a href="#" class="btn btn-primary btn-lg" id="hero-signup" onclick="handleCTA('Sign Up', 'Hero')">
+          Get started free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="btn btn-ghost btn-lg" id="hero-demo" onclick="handleCTA('Request Demo', 'Hero')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6 5.5l5 2.5-5 2.5V5.5z" fill="currentColor"/></svg>
+          Request demo
+        </a>
+      </div>
+      <div class="hero-social-proof" data-animate>
+        <div class="avatar-stack">
+          <div class="avatar" style="background:#6366f1"></div>
+          <div class="avatar" style="background:#f59e0b"></div>
+          <div class="avatar" style="background:#10b981"></div>
+          <div class="avatar" style="background:#ef4444"></div>
+          <div class="avatar" style="background:#8b5cf6"></div>
+        </div>
+        <span>Trusted by <strong>2,400+</strong> product teams worldwide</span>
+      </div>
+    </div>
+    <div class="hero-dashboard" data-animate>
+      <div class="dashboard-mockup">
+        <div class="dash-header">
+          <div class="dash-dots"><span></span><span></span><span></span></div>
+          <span class="dash-title">Nexus Dashboard — Live</span>
+          <span class="dash-live"><span class="pulse"></span>Live</span>
+        </div>
+        <div class="dash-body">
+          <div class="dash-stat-row">
+            <div class="dash-stat">
+              <div class="stat-label">Conversion Rate</div>
+              <div class="stat-value" data-counter="4.7" data-suffix="%">0%</div>
+              <div class="stat-delta up">↑ 1.2% vs last week</div>
+            </div>
+            <div class="dash-stat">
+              <div class="stat-label">Active Users</div>
+              <div class="stat-value" data-counter="12847" data-suffix="">0</div>
+              <div class="stat-delta up">↑ 342 today</div>
+            </div>
+            <div class="dash-stat">
+              <div class="stat-label">Funnel Drop-off</div>
+              <div class="stat-value" data-counter="23" data-suffix="%">0%</div>
+              <div class="stat-delta down">↓ 3.4% improvement</div>
+            </div>
+          </div>
+          <div class="dash-chart">
+            <div class="chart-label">Weekly Events</div>
+            <div class="chart-bars">
+              <div class="bar" style="--h:45%"><span>M</span></div>
+              <div class="bar" style="--h:62%"><span>T</span></div>
+              <div class="bar" style="--h:38%"><span>W</span></div>
+              <div class="bar" style="--h:78%"><span>T</span></div>
+              <div class="bar" style="--h:55%"><span>F</span></div>
+              <div class="bar active" style="--h:91%"><span>S</span></div>
+              <div class="bar" style="--h:70%"><span>S</span></div>
+            </div>
+          </div>
+          <div class="dash-events">
+            <div class="event-label">Live Events</div>
+            <div class="event-stream" id="eventStream">
+              <div class="event-item">
+                <span class="event-dot cta"></span>
+                <span class="event-name">CTA Clicked</span>
+                <span class="event-prop">button: Sign Up</span>
+                <span class="event-time">just now</span>
+              </div>
+              <div class="event-item">
+                <span class="event-dot page"></span>
+                <span class="event-name">Page View</span>
+                <span class="event-prop">path: /pricing</span>
+                <span class="event-time">2s ago</span>
+              </div>
+              <div class="event-item">
+                <span class="event-dot cta"></span>
+                <span class="event-name">CTA Clicked</span>
+                <span class="event-prop">button: Request Demo</span>
+                <span class="event-time">5s ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LOGOS ── -->
+  <section class="logos-section">
+    <div class="container">
+      <p class="logos-label">Trusted by product teams at</p>
+      <div class="logos-row">
+        <div class="logo-item">Stripe</div>
+        <div class="logo-item">Notion</div>
+        <div class="logo-item">Linear</div>
+        <div class="logo-item">Vercel</div>
+        <div class="logo-item">Figma</div>
+        <div class="logo-item">Retool</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ── -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-tag">Features</span>
+        <h2>Everything you need to understand your users</h2>
+        <p>From raw event streams to boardroom-ready insights — Nexus handles the entire analytics lifecycle.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card card-large" data-animate onclick="trackFeatureView('Funnel Analysis')">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 6h20l-8 10v8l-4-2V16L4 6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Funnel Analysis</h3>
+          <p>Visualize every step users take toward conversion. Identify exactly where they drop off and why, with statistical significance baked in.</p>
+          <div class="feature-visual funnel-visual">
+            <div class="funnel-bar" style="--w:100%; --c: #e2ff5d">
+              <span>Page View</span><span>100%</span>
+            </div>
+            <div class="funnel-bar" style="--w:68%; --c: #a3e635">
+              <span>Sign Up Click</span><span>68%</span>
+            </div>
+            <div class="funnel-bar" style="--w:41%; --c: #4ade80">
+              <span>Form Submit</span><span>41%</span>
+            </div>
+            <div class="funnel-bar" style="--w:23%; --c: #22d3ee">
+              <span>Activated</span><span>23%</span>
+            </div>
+          </div>
+        </div>
+        <div class="feature-card" data-animate onclick="trackFeatureView('Behavioral Cohorts')">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 22c0-3.314 2.686-6 6-6h8c3.314 0 6 2.686 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Behavioral Cohorts</h3>
+          <p>Group users by actions, not just attributes. Build cohorts based on real product behavior and track how they evolve over time.</p>
+          <div class="feature-tags">
+            <span>Power Users</span>
+            <span>Churned</span>
+            <span>Demo Requests</span>
+            <span>High Intent</span>
+          </div>
+        </div>
+        <div class="feature-card" data-animate onclick="trackFeatureView('Session Replay')">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M11 9.5l7 3.5-7 3.5V9.5z" fill="currentColor"/></svg>
+          </div>
+          <h3>Session Replay</h3>
+          <p>Watch exactly how users interact with your product. See clicks, scrolls, and frustration signals with millisecond precision.</p>
+        </div>
+        <div class="feature-card" data-animate onclick="trackFeatureView('Retention Analysis')">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 22V12l9-7 9 7v10" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="10" y="16" width="8" height="6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Retention Analysis</h3>
+          <p>Understand which features keep users coming back. Track N-day and unbounded retention across any event combination.</p>
+        </div>
+        <div class="feature-card" data-animate onclick="trackFeatureView('A/B Testing')">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 5h7l4 18h-7L5 5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 5h7L19 14" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 18h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>A/B Testing</h3>
+          <p>Run statistically rigorous experiments. Ship with confidence knowing your changes actually move the metrics that matter.</p>
+        </div>
+        <div class="feature-card card-accent" data-animate>
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3l2.5 7.5H24l-6.25 4.5 2.5 7.5L14 18l-6.25 4.5 2.5-7.5L4 10.5h7.5L14 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>AI Insights</h3>
+          <p>Nexus AI surfaces anomalies, predicts churn, and recommends experiments — before you even think to ask.</p>
+          <a href="#" class="feature-link" onclick="handleCTA('Learn More AI', 'Features')">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-tag">Process</span>
+        <h2>Up and running in minutes</h2>
+        <p>No data engineering required. Install once, analyze forever.</p>
+      </div>
+      <div class="steps">
+        <div class="step" data-animate>
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3>Install the SDK</h3>
+            <p>One script tag or npm install. Works with React, Vue, Angular, vanilla JS — and every mobile platform.</p>
+            <div class="code-block">
+              <span class="code-comment">// Install via npm</span><br/>
+              <span class="code-keyword">npm</span> install @amplitude/analytics-browser<br/>
+              <br/>
+              <span class="code-comment">// Initialize</span><br/>
+              <span class="code-keyword">amplitude</span>.init(<span class="code-string">'YOUR_API_KEY'</span>);
+            </div>
+          </div>
+        </div>
+        <div class="step" data-animate>
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3>Track what matters</h3>
+            <p>Fire events with any properties you care about. Nexus automatically enriches them with device, location, and session data.</p>
+            <div class="code-block">
+              <span class="code-keyword">amplitude</span>.track(<span class="code-string">'CTA Clicked'</span>, {<br/>
+              &nbsp;&nbsp;button: <span class="code-string">'Sign Up'</span>,<br/>
+              &nbsp;&nbsp;section: <span class="code-string">'Hero'</span>,<br/>
+              &nbsp;&nbsp;plan: <span class="code-string">'Pro'</span><br/>
+              });
+            </div>
+          </div>
+        </div>
+        <div class="step" data-animate>
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3>Build charts in seconds</h3>
+            <p>Drag-and-drop funnel builder. Cohort creator. Retention heatmaps. No SQL needed — but available if you want it.</p>
+          </div>
+        </div>
+        <div class="step" data-animate>
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <h3>Ship with confidence</h3>
+            <p>Set up alerts for metric regressions, share dashboards with stakeholders, and make every release data-driven.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ── -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-tag">Pricing</span>
+        <h2>Simple, transparent pricing</h2>
+        <p>Start free. Scale as you grow. No surprise bills.</p>
+      </div>
+      <div class="pricing-grid" data-animate>
+        <div class="pricing-card" onclick="trackPricingView('Starter')">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">0</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="plan-desc">Perfect for indie makers and early-stage products.</p>
+          <ul class="plan-features">
+            <li>✓ Up to 10M events/month</li>
+            <li>✓ 2 team members</li>
+            <li>✓ Funnels &amp; cohorts</li>
+            <li>✓ 90-day data history</li>
+            <li>✗ Session replay</li>
+            <li>✗ A/B testing</li>
+          </ul>
+          <a href="#" class="btn btn-ghost btn-full" onclick="handleCTA('Sign Up', 'Pricing - Starter')">Get started free</a>
+        </div>
+        <div class="pricing-card featured" onclick="trackPricingView('Growth')">
+          <div class="plan-badge">Most popular</div>
+          <div class="plan-name">Growth</div>
+          <div class="plan-price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">49</span>
+            <span class="price-period">/month</span>
+          </div>
+          <p class="plan-desc">For growing teams who need deeper insights.</p>
+          <ul class="plan-features">
+            <li>✓ Up to 100M events/month</li>
+            <li>✓ 10 team members</li>
+            <li>✓ Funnels, cohorts &amp; retention</li>
+            <li>✓ 2-year data history</li>
+            <li>✓ Session replay (50k sessions)</li>
+            <li>✓ A/B testing</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-full" onclick="handleCTA('Sign Up', 'Pricing - Growth')">Start free trial</a>
+        </div>
+        <div class="pricing-card" onclick="trackPricingView('Enterprise')">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">
+            <span class="price-amount" style="font-size:2rem">Custom</span>
+          </div>
+          <p class="plan-desc">For large orgs needing compliance, SLAs, and scale.</p>
+          <ul class="plan-features">
+            <li>✓ Unlimited events</li>
+            <li>✓ Unlimited team members</li>
+            <li>✓ Custom data retention</li>
+            <li>✓ SSO &amp; SCIM</li>
+            <li>✓ Dedicated CSM</li>
+            <li>✓ SLA guarantee</li>
+          </ul>
+          <a href="#" class="btn btn-ghost btn-full" onclick="handleCTA('Request Demo', 'Pricing - Enterprise')">Request demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-tag">Customers</span>
+        <h2>Teams who've shipped smarter</h2>
+      </div>
+      <div class="testimonials-grid" data-animate>
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p>Nexus cut our time-to-insight from 2 weeks to 20 minutes. Our PMs actually use it every day — that says everything.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#6366f1">S</div>
+            <div>
+              <div class="author-name">Sarah K.</div>
+              <div class="author-role">Head of Product, Finstack</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card featured-quote">
+          <div class="quote-mark">"</div>
+          <p>We identified a 34% drop-off in our onboarding funnel within the first week. Fixed it in a sprint. Revenue up 18% that quarter.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#f59e0b">M</div>
+            <div>
+              <div class="author-name">Marcus T.</div>
+              <div class="author-role">CTO, Loopify</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p>The cohort builder alone is worth the price. We segment users by behavior, not guesswork. Our retention emails now actually work.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#10b981">A</div>
+            <div>
+              <div class="author-name">Amara O.</div>
+              <div class="author-role">Growth Lead, Cedex</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA SECTION ── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card" data-animate>
+        <div class="cta-glow"></div>
+        <h2>Ready to understand your users?</h2>
+        <p>Join 2,400+ teams who ship with data confidence. Free plan, no credit card required.</p>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-primary btn-lg" onclick="handleCTA('Sign Up', 'Bottom CTA')">
+            Get started — it's free
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="btn btn-ghost btn-lg" onclick="handleCTA('Request Demo', 'Bottom CTA')">Talk to sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-mark">N</span>
+            <span class="logo-text">nexus</span>
+          </a>
+          <p>Product analytics that respects your users' privacy and your team's time.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">Changelog</a>
+            <a href="#">Roadmap</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#">Docs</a>
+            <a href="#">API Reference</a>
+            <a href="#">Status</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Nexus Analytics, Inc. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── MODAL: SIGN UP ── -->
+  <div class="modal-overlay" id="signupModal" onclick="closeModal('signupModal')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('signupModal')">✕</button>
+      <div class="modal-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4z" stroke="#e2ff5d" stroke-width="1.5"/><path d="M12 16l3 3 5-5" stroke="#e2ff5d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Start your free account</h3>
+      <p>14-day Pro trial included. No credit card required.</p>
+      <div class="modal-form">
+        <input type="text" placeholder="Your full name" id="signupName" />
+        <input type="email" placeholder="Work email" id="signupEmail" />
+        <button class="btn btn-primary btn-full" onclick="handleFormSubmit('Sign Up')">Create free account</button>
+      </div>
+      <p class="modal-note">By signing up you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── MODAL: REQUEST DEMO ── -->
+  <div class="modal-overlay" id="demoModal" onclick="closeModal('demoModal')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('demoModal')">✕</button>
+      <div class="modal-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="#e2ff5d" stroke-width="1.5"/><path d="M12 11l10 5-10 5V11z" fill="#e2ff5d"/></svg>
+      </div>
+      <h3>Request a live demo</h3>
+      <p>30-minute walkthrough with a product specialist. We'll focus on your exact use case.</p>
+      <div class="modal-form">
+        <input type="text" placeholder="Your full name" id="demoName" />
+        <input type="email" placeholder="Work email" id="demoEmail" />
+        <input type="text" placeholder="Company name" id="demoCompany" />
+        <select id="demoTeamSize">
+          <option value="">Team size</option>
+          <option value="1-10">1–10 people</option>
+          <option value="11-50">11–50 people</option>
+          <option value="51-200">51–200 people</option>
+          <option value="200+">200+ people</option>
+        </select>
+        <button class="btn btn-primary btn-full" onclick="handleFormSubmit('Request Demo')">Book my demo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOAST ── -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/amplitude-config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
