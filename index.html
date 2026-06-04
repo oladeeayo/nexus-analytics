@@ -15,9 +15,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
 
   <!-- Amplitude SDK -->
-  <script type="text/javascript">
-    !function(){"use strict";!function(e,t){var r=e.amplitude||{_q:[],_iq:{}};if(r.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");else{r.invoked=!0;var n=t.createElement("script");n.type="text/javascript";n.integrity="sha384-XNX6U2ua04l5B/F8NrzWxvzc0G04lFqILvdFMqXWjwJfZfLIlMOzWCHiTuTzxjv";n.crossOrigin="anonymous";n.async=!0;n.src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz";n.onload=function(){e.amplitude.runQueuedFunctions||console.log("[Amplitude] Error: could not load SDK")};var s=t.getElementsByTagName("script")[0];function v(e,t){e.prototype[t]=function(){return this._q.push({name:t,args:Array.prototype.slice.call(arguments,0)}),this}}s.parentNode.insertBefore(n,s);for(var o=function(){return this._q=[],this},i=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove","getUserProperties"],a=0;a<i.length;a++)v(o,i[a]);r.Identify=o;for(var c=function(){return this._q=[],this},l=["getEventProperties","setProductId","setQuantity","setPrice","setRevenue","setRevenueType","setEventProperties"],u=0;u<l.length;u++)v(c,l[u]);r.Revenue=c;var p=["getDeviceId","setDeviceId","getSessionId","setSessionId","getUserId","setUserId","setOptOut","setTransport","reset","extendSession"],d=["init","add","remove","track","logEvent","identify","groupIdentify","setGroup","revenue","flush"];function f(e){function t(t,r){e[t]=function(){var n={promise:new Promise((r=>{e._q.push({name:t,args:Array.prototype.slice.call(arguments,0),resolve:r})}))};if(r)return n}}for(var r=0;r<p.length;r++)t(p[r],!1);for(var n=0;n<d.length;n++)t(d[n],!0)}f(r);e.amplitude=r}}(window,document)}();
-    </script>
+  <script type="module">
+    import * as amplitude from 'https://esm.sh/@amplitude/analytics-browser@2.11.1';
+    window.amplitude = amplitude;
+    amplitude.init('77b39c40a67ec7faaf4f0926567eb2d', {
+      defaultTracking: {
+        pageViews: true,
+        sessions: true,
+        formInteractions: true,
+      }
+    });
+    console.log('[Amplitude] Initialized for Nexus Analytics');
+  </script>
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
